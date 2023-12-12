@@ -117,4 +117,4 @@ def processar_entrada():
 
 # LEMBRE-SE DE ALTERAR O IP PARA O SEU IP LOCAL
 if __name__ == '__main__':
-    app.run(debug=True, host='192.168.0.106', port=5000)
+    app.run(debug=True, host='localhost', port=5000)

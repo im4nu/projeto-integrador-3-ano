@@ -155,7 +155,9 @@ export default function Form() {
       });
       const { resultado } = response.data;
       if (resultado === 2) {
-        setClassification("Grupo de alto risco");
+        setClassification("Grupo de ALTO risco");
+      } else if (resultado === 1) {
+        setClassification("Grupo de BAIXO risco");
       } else {
         setClassification("Fora do grupo de risco");
       }
@@ -1446,23 +1448,40 @@ export default function Form() {
           successModal ? "lef-[0vw]" : "left-[100vw]"
         } flex flex-col text-center gap-4 fixed ease-linear duration-300 top-0 bg-white dark:bg-dark dark:text-white z-40 w-screen h-screen justify-center items-center`}
       >
-        <Image
-          alt="Ilustação"
-          src={
-            classification === "Fora do grupo de risco"
-              ? "/images/ilustration.svg"
-              : "/images/sad_ilustration.svg"
-          }
-          width={278}
-          height={208}
-          className="w-1/2 h-1/3"
-        />
+        {classification === "Fora do grupo de risco" && (
+          <Image
+            alt="Ilustação"
+            src={"/images/ilustration.svg"}
+            width={278}
+            height={208}
+            className="w-1/2 h-1/3"
+          />
+        )}
+
+        {classification === "Grupo de ALTO risco" && (
+          <Image
+            alt="Ilustação"
+            src={"/images/sad_ilustration.svg"}
+            width={278}
+            height={208}
+            className="w-1/2 h-1/3"
+          />
+        )}
+
+        {classification === "Grupo de BAIXO risco" && (
+          <Image
+            alt="Ilustação"
+            src={"/images/medicinal.svg"}
+            width={278}
+            height={208}
+            className="w-1/2 h-1/3"
+          />
+        )}
 
         <p className="w-4/5">
           De acordo com as suas respostar nós conseguimos te enquadrar em um
           grupo:
         </p>
-
         <>
           {cardsData
             .filter((card) => card.title === classification)
@@ -1488,7 +1507,6 @@ export default function Form() {
               </Motion>
             ))}
         </>
-
         <button
           onClick={() => setSuccessModal(false)}
           className="bg-main rounded-lg py-4 w-[200px] flex flex-row text-white items-center justify-center gap-2"
