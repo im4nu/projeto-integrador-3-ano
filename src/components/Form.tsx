@@ -20,6 +20,35 @@ const SchemaValidation = z.object({
   hepatic: z.boolean(),
   riscFactor: z.boolean(),
   gender: z.enum(["Masculino", "Feminino"]),
+  nosocomial: z.boolean(),
+  AVE_SUINO: z.boolean(),
+  FEBRE: z.boolean(),
+  TOSSE: z.boolean(),
+  GARGANTA: z.boolean(),
+  DESC_RESP: z.boolean(),
+  SATURACAO: z.boolean(),
+  DIARREIA: z.boolean(),
+  VOMITO: z.boolean(),
+  OUTRO_SIN: z.boolean(),
+  PUERPERA: z.boolean(),
+  HEMATOLOGI: z.boolean(),
+  SIND_DOWN: z.boolean(),
+  DIABETES: z.boolean(),
+  NEUROLOGIC: z.boolean(),
+  PNEUMOPATI: z.boolean(),
+  IMUNODEPRE: z.boolean(),
+  RENAL: z.boolean(),
+  VACINA: z.boolean(),
+  ANTIVIRAL: z.boolean(),
+  UTI: z.boolean(),
+  SUPORT_VEN: z.boolean(),
+  EVOLUCAO: z.boolean(),
+  DOR_ABD: z.boolean(),
+  FADIGA: z.boolean(),
+  PERD_OLFT: z.boolean(),
+  PERD_PALA: z.boolean(),
+  TOMO_RES: z.boolean(),
+  VACINA_COV: z.boolean(),
 });
 
 type FormData = z.infer<typeof SchemaValidation>;
@@ -32,6 +61,7 @@ export default function Form() {
     handleSubmit,
     watch,
     formState: { errors },
+    // reset,
   } = useForm<FormData>({
     defaultValues: {
       age: undefined,
@@ -43,6 +73,35 @@ export default function Form() {
       cardiopat: false,
       hepatic: false,
       riscFactor: false,
+      nosocomial: false,
+      AVE_SUINO: false,
+      FEBRE: false,
+      TOSSE: false,
+      GARGANTA: false,
+      DESC_RESP: false,
+      SATURACAO: false,
+      DIARREIA: false,
+      VOMITO: false,
+      OUTRO_SIN: false,
+      PUERPERA: false,
+      HEMATOLOGI: false,
+      SIND_DOWN: false,
+      DIABETES: false,
+      NEUROLOGIC: false,
+      PNEUMOPATI: false,
+      IMUNODEPRE: false,
+      RENAL: false,
+      VACINA: false,
+      ANTIVIRAL: false,
+      UTI: false,
+      SUPORT_VEN: false,
+      EVOLUCAO: false,
+      DOR_ABD: false,
+      FADIGA: false,
+      PERD_OLFT: false,
+      PERD_PALA: false,
+      TOMO_RES: false,
+      VACINA_COV: false,
     },
     resolver: zodResolver(SchemaValidation),
   });
@@ -58,41 +117,41 @@ export default function Form() {
         CS_SEXO: data.gender === "Feminino" ? 0 : 1,
         NU_IDADE_N: data.age,
         CS_GESTANT: (+data.impregnated).toString(),
-        NOSOCOMIAL: "0",
-        AVE_SUINO: "0",
-        FEBRE: "0",
-        TOSSE: "0",
-        GARGANTA: "0",
+        NOSOCOMIAL: (+data.nosocomial).toString(),
+        AVE_SUINO: (+data.AVE_SUINO).toString(),
+        FEBRE: (+data.FEBRE).toString(),
+        TOSSE: (+data.TOSSE).toString(),
+        GARGANTA: (+data.GARGANTA).toString(),
         DISPNEIA: (+data.dispneia).toString(),
-        DESC_RESP: "0",
-        SATURACAO: "0",
-        DIARREIA: "0",
-        VOMITO: "0",
-        OUTRO_SIN: "0",
-        PUERPERA: "0",
+        DESC_RESP: (+data.DESC_RESP).toString(),
+        SATURACAO: (+data.SATURACAO).toString(),
+        DIARREIA: (+data.DIARREIA).toString(),
+        VOMITO: (+data.VOMITO).toString(),
+        OUTRO_SIN: (+data.OUTRO_SIN).toString(),
+        PUERPERA: (+data.PUERPERA).toString(),
         FATOR_RISC: (+data.riscFactor).toString(),
         CARDIOPATI: (+data.cardiopat).toString(),
-        HEMATOLOGI: "0",
-        SIND_DOWN: "0",
+        HEMATOLOGI: (+data.HEMATOLOGI).toString(),
+        SIND_DOWN: (+data.SIND_DOWN).toString(),
         HEPATICA: (+data.hepatic).toString(),
         ASMA: (+data.asthma).toString(),
-        DIABETES: "0",
-        NEUROLOGIC: "0",
-        PNEUMOPATI: "0",
-        IMUNODEPRE: "0",
-        RENAL: "0",
+        DIABETES: (+data.DIABETES).toString(),
+        NEUROLOGIC: (+data.NEUROLOGIC).toString(),
+        PNEUMOPATI: (+data.PNEUMOPATI).toString(),
+        IMUNODEPRE: (+data.IMUNODEPRE).toString(),
+        RENAL: (+data.RENAL).toString(),
         OBESIDADE: (+data.obesity).toString(),
-        VACINA: "0",
-        ANTIVIRAL: "0",
-        UTI: "0",
-        SUPORT_VEN: "0",
-        EVOLUCAO: "0",
-        DOR_ABD: "0",
-        FADIGA: "0",
-        PERD_OLFT: "0",
-        PERD_PALA: "0",
-        TOMO_RES: "0",
-        VACINA_COV: "0",
+        VACINA: (+data.VACINA).toString(),
+        ANTIVIRAL: (+data.ANTIVIRAL).toString(),
+        UTI: (+data.UTI).toString(),
+        SUPORT_VEN: (+data.SUPORT_VEN).toString(),
+        EVOLUCAO: (+data.EVOLUCAO).toString(),
+        DOR_ABD: (+data.DOR_ABD).toString(),
+        FADIGA: (+data.FADIGA).toString(),
+        PERD_OLFT: (+data.PERD_OLFT).toString(),
+        PERD_PALA: (+data.PERD_PALA).toString(),
+        TOMO_RES: (+data.TOMO_RES).toString(),
+        VACINA_COV: (+data.VACINA_COV).toString(),
       });
       const { resultado } = response.data;
       if (resultado === 2) {
@@ -103,6 +162,7 @@ export default function Form() {
     } finally {
       setIsLoading(false);
       setSuccessModal(true);
+      // reset();
     }
   }
 
@@ -334,6 +394,919 @@ export default function Form() {
             )}
           />
         </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>
+            Você trabalha ou tem contato direto com aves, suínos, ou outro
+            animal?
+          </p>
+          {/*Aqui é Ave_suino*/}
+          <Controller
+            name="AVE_SUINO"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com febre?</p>
+          <Controller
+            name="FEBRE"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com Tosse?</p>
+          <Controller
+            name="TOSSE"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com dor de Garganta?</p>
+          <Controller
+            name="DESC_RESP"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com algum disconforto respiratório?</p>
+          {/*DESC_RESP*/}
+          <Controller
+            name="DESC_RESP"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com Diarreia ou algum sintoma?</p>
+          <Controller
+            name="DIARREIA"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está vomitando?</p>
+          <Controller
+            name="VOMITO"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Doença Hematológica Crônica</p>
+          <Controller
+            name="HEMATOLOGI"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui possui Síndrome de Down?</p>
+          <Controller
+            name="SIND_DOWN"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Diabetes?</p>
+          <Controller
+            name="DIABETES"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Doença Neurológica?</p>
+          <p className="text-xs">
+            - Patologias que interferem no funcionamento do sistema nervoso
+            central e periférico.
+          </p>
+          <Controller
+            name="NEUROLOGIC"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Pneumopatia crônica?</p>
+          <Controller
+            name="PNEUMOPATI"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Imunodeficiência ou Imunodepressão</p>
+          <p className="text-xs">
+            - Diminuição da função do sistema imunológico.
+          </p>
+          <Controller
+            name="IMUNODEPRE"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui Doença Renal Crônica?</p>
+          <Controller
+            name="RENAL"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você foi vacinado contra gripe na última campanha,</p>
+          <Controller
+            name="VACINA"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você fez uso suporte ventilatório nos últimos dias?</p>
+          <Controller
+            name="SUPORT_VEN"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você sentiu dores abdominais?</p>
+          <Controller
+            name="DOR_ABD"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você apresentou fadiga nesses últimos dias?</p>
+          <Controller
+            name="FADIGA"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você esta com perda do olfato?</p>
+          <Controller
+            name="PERD_OLFT"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você esta com perda do paladar</p>
+          <Controller
+            name="PERD_PALA"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você tomou alguma vacina para COVID-19</p>
+          <Controller
+            name="VACINA_COV"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você adquiriu Nossocomial?</p>
+          <Controller
+            name="nosocomial"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Sua saturação de 02 no sangue está maior que 95%?</p>
+          <Controller
+            name="SATURACAO"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você ficou internado na UTI devido a SARS?</p>
+          <Controller
+            name="UTI"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você possui outro sintoma?</p>
+          <Controller
+            name="OUTRO_SIN"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
 
         <div className="flex flex-col items-start justify-center w-full gap-3">
           <p>Qual o seu gênero</p>
@@ -396,6 +1369,45 @@ export default function Form() {
           </div>
         )}
 
+        <div className="flex flex-col items-start justify-center w-full gap-3">
+          <p>Você está com Puerpera?</p>
+          <p className="text-xs">
+            - Mulher que pariu recentemente – até 45 dias do parto?
+          </p>
+          <Controller
+            name="PUERPERA"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center">
+                <label className="cursor-pointer flex min-w-[150px] w-full justify-between flex-row h-fit">
+                  <span className="text-center">Não</span>
+                  <div className="relative flex w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      className="hidden"
+                      checked={field.value}
+                      onChange={field.onChange}
+                    />
+                    <div
+                      className={`toggle__line w-10 h-4 rounded-full shadow-inner absolute top-1 left-0 ${
+                        field.value ? "bg-blue-500" : "bg-gray-400"
+                      }`}
+                    />
+                    <div
+                      className={`toggle__dot absolute w-6 h-6 rounded-full shadow left-0 top-0 transition ${
+                        field.value
+                          ? "transform translate-x-full bg-blue-500"
+                          : "bg-gray-400"
+                      }`}
+                    />
+                  </div>
+                  <span className="text-center">Sim</span>
+                </label>
+              </div>
+            )}
+          />
+        </div>
         <div className="flex flex-col items-start justify-center w-full gap-3">
           <p>Qual a sua Idade em anos?</p>
           <Controller
